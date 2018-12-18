@@ -3,27 +3,24 @@
 twStationList = ["466910", "466920", "466930", "C0A980", "C0A990", "C0A9A0", "C0A9B0", "C0A9C0", "C0A9E0", "C0A9F0", "C0AC40", "C0AC70", "C0AC80", "C0AH40", "C0AH70", "C1A730", "C1AC50"]
 # 年份
 yearList=['2017', '2018']
-# 月份始末，[1, 12] 表示 1 到 12 月
-monthRange = [1, 12]
+# 月份
+monthSearch = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]
 
 # encoding: utf-8
 # create year data 2月用30天去算
 def cdateList(year):
     # days31 (1,3,5,7,8,10,12) days30(2,4,6,9,11)
     month31=[1,3,5,7,8,10,12]
-    month12=['01','02','03','04','05','06','07','08','09', '10', '11', '12']
-    day31 = ['01','02','03','04','05','06','07','08','09', '10', '11', '12', '13', '14', '15', '16', '17', '18', '19', '20', '21', '22', '23', '24', '25', '26', '27', '28', '29', '30', '31']
-    day30 = ['01','02','03','04','05','06','07','08','09', '10', '11', '12', '13', '14', '15', '16', '17', '18', '19', '20', '21', '22', '23', '24', '25', '26', '27', '28', '29', '30']
     yearData=[]
     s=""
-    for month in range(monthRange[0], monthRange[1] + 1):
+    for month in monthSearch:
         if month in month31:
-            for day in day31:
-                s = year+'-'+str(month).zfill(2)+'-'+day
+            for day in range(1, 32):
+                s = year + '-' + str(month).zfill(2) + '-' + str(day).zfill(2)
                 yearData.append(s)
         else :
-            for day in day30:
-                s = year+'-'+str(month).zfill(2)+'-'+day
+            for day in range(1, 31):
+                s = year + '-' + str(month).zfill(2) + '-' + str(day).zfill(2)
                 yearData.append(s)
     return yearData
     
