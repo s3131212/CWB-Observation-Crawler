@@ -1,3 +1,11 @@
+# Config
+# 測站編號，以下是台北市的所有測站
+twStationList = ["466910", "466920", "466930", "C0A980", "C0A990", "C0A9A0", "C0A9B0", "C0A9C0", "C0A9E0", "C0A9F0", "C0AC40", "C0AC70", "C0AC80", "C0AH40", "C0AH70", "C1A730", "C1AC50"]
+# 年份
+yearList=['2017', '2018']
+# 月份始末，[1, 12] 表示 1 到 12 月
+monthRange = [1, 12]
+
 # encoding: utf-8
 # create year data 2月用30天去算
 def cdateList(year):
@@ -8,14 +16,14 @@ def cdateList(year):
     day30 = ['01','02','03','04','05','06','07','08','09', '10', '11', '12', '13', '14', '15', '16', '17', '18', '19', '20', '21', '22', '23', '24', '25', '26', '27', '28', '29', '30']
     yearData=[]
     s=""
-    for month,strmonth in zip(range(1,13),month12):
+    for month in range(monthRange[0], monthRange[1] + 1):
         if month in month31:
             for day in day31:
-                s = year+'-'+strmonth+'-'+day
+                s = year+'-'+str(month).zfill(2)+'-'+day
                 yearData.append(s)
         else :
             for day in day30:
-                s = year+'-'+strmonth+'-'+day
+                s = year+'-'+str(month).zfill(2)+'-'+day
                 yearData.append(s)
     return yearData
     
@@ -103,25 +111,13 @@ import pandas as pd
 from time import sleep
 from bs4 import BeautifulSoup
 
-# 臺南 (467410) 永康 (467420) 嘉義 (467480) 臺中 (467490) 阿里山 (467530) 新竹 (467571) 恆春 (467590)
-# 成功 (467610) 蘭嶼 (467620) 日月潭 (467650) 臺東 (467660) 梧棲 (467770) 七股 (467780) 墾丁 (467790)
-# 馬祖 (467990) 新屋 (467050) 板橋 (466880) 淡水 (466900) 鞍部 (466910) 臺北 (466920) 竹子湖 (466930)
-# 基隆 (466940) 彭佳嶼 (466950) 花蓮 (466990) 蘇澳 (467060) 宜蘭 (467080) 金門 (467110) 東吉島 (467300)
-# 澎湖 (467350) 高雄 (467440) 大武 (467540) 玉山 (467550) 
-# 新竹 (467571) 真正的 url station 467570 官網標示錯誤
-twStationList = ['467410','467420','467480','467490','467530','467570','467590','467610'
-,'467620','467650','467660','467770','467780','467790','467990','467050','466880','466900'
-,'466910','466920','466930','466940','466950','466990','467060','467080','467110','467300'
-,'467350','467440','467540','467550']
-
 # station
 for station in twStationList:
     # create station folder
     dirPath = './data/'+station
     if os.path.exists(dirPath) == 0:
         os.makedirs(dirPath)
-    # year
-    yearList=['2013','2014']
+
     for year in yearList:
         dateList = cdateList(year)
         # create year folder
