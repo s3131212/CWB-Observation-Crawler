@@ -132,8 +132,8 @@ for station in twStationList:
             try:
                 print(station+':'+date)
                 crawler(url,station,year,date)
-            except:
-                print(station+':'+date+'error')
+            except Exception as e:
+                print(station + ':' + date + ' Error!' + ' Code: {c}, Message: {m}'.format(c = type(e).__name__, m = str(e)))
                 with open ("./error.txt",'a') as f:
                     f.write(url+','+station+','+year+','+date+'\n') 
 
