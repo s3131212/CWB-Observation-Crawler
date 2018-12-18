@@ -17,7 +17,7 @@ monthSearch = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]
 
 修改後執行 `python3 climate_crawler.py`，資料會被下載於 /data 中
 
-還沒修改 [multi_crawler.py](https://github.com/s3131212/CWB-Observation-Crawler/blob/master/multi_crawler.py)（多執行緒版本），PR Welcome!
+目前 [multi_crawler.py](https://github.com/s3131212/CWB-Observation-Crawler/blob/master/multi_crawler.py)（多執行緒版本）還沒有完成修改故不能運作，有空再處理，PR Welcome!
 
 ## 版權聲明
 此程式修改自 [wy36101299/crawler-central-weather](https://github.com/wy36101299/crawler-central-weather)，此程式碼由原作者 [TienYang](https://github.com/wy36101299) 製作並由 [Allen Chou](https://github.com/s3131212) 修改後釋出。
