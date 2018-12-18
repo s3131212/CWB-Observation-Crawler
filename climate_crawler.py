@@ -22,23 +22,26 @@ def cdateList(year):
 # 爬取主函式
 def crawler(url,station,year,date):
     resp = requests.get(url)
-    soup = BeautifulSoup(resp.text)
+    soup = BeautifulSoup(resp.text, features="html.parser")
 
     # find no data page
-    error = soup.find(class_="imp").string.encode('utf-8')
+    error = soup.find("label", class_="imp").string
+
     if error == '本段時間區間內無觀測資料。':
+        print(station+':'+date+' 無觀測資料')
         with open ("./nodata.txt",'a') as f:
-            f.write(url+'\n') 
+            f.write(url+'\n')
+        return
 
     form =[]
 
     # title
     titles = soup.find_all("th")
-    titles = titles[9:]
+    titles = titles[11:28]
     strtitle=[]
     for title in titles:
         title = title.contents
-        title=title[0]+title[2]+title[4]
+        title=title[0] #+title[2]+title[4]
         strtitle.append(title)
 
     # parameter
@@ -49,8 +52,8 @@ def crawler(url,station,year,date):
         tmp = tmp.find_all("td")
         parameter =[]
         for strtmp in tmp:
-            strtmp = strtmp.string
-            parameter .append(strtmp)
+            strtmp = ''.join(filter(lambda x: (x.isdigit() or x == '.'  or x == 'T'), strtmp.string))
+            parameter.append(strtmp)
         form.append(parameter)
 
     form = pd.DataFrame(form, columns=strtitle)
