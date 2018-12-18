@@ -127,8 +127,8 @@ for station in twStationList:
             os.makedirs(dirPath)
         # date
         for date in dateList:
-            # http://e-service.cwb.gov.tw/HistoryDataQuery/DayDataController.do?command=viewMain&station=467410&datepicker=2014-11-26
-            url="http://e-service.cwb.gov.tw/HistoryDataQuery/DayDataController.do?command=viewMain&station="+station+"&datepicker="+date
+            # http://e-service.cwb.gov.tw/HistoryDataQuery/DayDataController.do?command=viewMain&station=466910&stname=&datepicker=2018-12-11
+            url="http://e-service.cwb.gov.tw/HistoryDataQuery/DayDataController.do?command=viewMain&station="+station+"&stname=&datepicker="+date
             try:
                 print(station+':'+date)
                 crawler(url,station,year,date)
